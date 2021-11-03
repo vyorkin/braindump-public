@@ -7,6 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://braindump.badykov.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>3D Printing</title>
+      <link>https://braindump.badykov.com/posts/20211102153331-3d_printing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://braindump.badykov.com/posts/20211102153331-3d_printing/</guid>
+      <description>FDM FlashForge Guider 2 https://market.yandex.ru/product--3d-printer-flashforge-guider-ii/1451135129?clid=1603&amp;sku=101465488124&amp;cpa=1   FlyingBear Ghost
+  aliexpress     ozon     Accessories  Сверла для чистки сопел под диаметр (феломент часто забивает сопла) Сопло на замену (может выйти из строя) Набор скобяных инструментов, чтобы отделять модель от стола (шпатель или что-то похожее) Зажимы Лак &amp;ldquo;прелесть&amp;rdquo; (наглухо клеит модель к столу)  SLA SLS Thingversion https://www.thingiverse.com/thing:4924147   </description>
+    </item>
+    
+    <item>
       <title>emacs</title>
       <link>https://braindump.badykov.com/posts/20211031155131-emacs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -53,6 +63,15 @@
     </item>
     
     <item>
+      <title>Polkadot Secure Validator</title>
+      <link>https://braindump.badykov.com/posts/20211102203354-polkadot_secure_validator/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://braindump.badykov.com/posts/20211102203354-polkadot_secure_validator/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Polkadot Staking</title>
       <link>https://braindump.badykov.com/posts/20211031183902-polkadot_staking/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -69,6 +88,18 @@
       <guid>https://braindump.badykov.com/posts/20211031221219-russian_finance_monitoring/</guid>
       <description>Мониторинг банковских карт физ. лиц  &amp;ldquo;Подозрительно бедные&amp;rdquo; Правило нулевого дохода (проверка соответствия &amp;ldquo;белых&amp;rdquo; доходов и стоимости имущества). Пока будут проверяться только граждане, подающие заявки на пособия  Рекомендации ЦБ Под подозрение и потенциальную блокировку попадают:
  &amp;ldquo;Необычно&amp;rdquo; большое кол-во переводов  &amp;gt;=10 в день &amp;gt;=50 в месяц &amp;gt;30 операций в день по зачислению или списанию   Переводы между физлицами на крупные суммы  От 100 тыс в день Более 1 млн в месяц   Между операциями по зачислению и списанию проходит мало времени  Автоматизированные переводы: Меньше 1 минуты (роботизированные) Ручные переводы: В течение 12 часов одних суток проводятся операции по зачислению списанию средств Это происходит на регулярной основе (в пределах 1 недели)   В течении недели средний остаток на счёте на конец дня не превышает 10% от среднедневного объёма операций по счёту Разные люди совершают переводы с использованием одного устройства  Система финансовых рейтингов физ.</description>
+    </item>
+    
+    <item>
+      <title>Substrate custom tokens</title>
+      <link>https://braindump.badykov.com/posts/20211103135200-substrate_custom_tokens/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://braindump.badykov.com/posts/20211103135200-substrate_custom_tokens/</guid>
+      <description>Overview There are a few ways to launch a token with Substrate.
+ pallet_balances    pallet_assets    ?  Balances Pallet Overview Manages a single finguble token, handles accounts and their balances.
+Initial balances Supplying initial balances with a genesis config:
+pub fn genesis_config(...) -&amp;gt; GenesisConfig { // ...  GenesisConfig { // ...  balances: runtime::BalancesConfig { balances: vec![ // (AccountId, Balance)  // ...  ], }, // .</description>
     </item>
     
     <item>

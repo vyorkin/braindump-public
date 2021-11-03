@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://braindump.badykov.com/posts/20211102153331-3d_printing/</loc>
+  </url><url>
     <loc>https://braindump.badykov.com/categories/</loc>
   </url><url>
     <loc>https://braindump.badykov.com/posts/20211031155131-emacs/</loc>
@@ -14,11 +16,15 @@
   </url><url>
     <loc>https://braindump.badykov.com/posts/20211031154915-polkadot/</loc>
   </url><url>
+    <loc>https://braindump.badykov.com/posts/20211102203354-polkadot_secure_validator/</loc>
+  </url><url>
     <loc>https://braindump.badykov.com/posts/20211031183902-polkadot_staking/</loc>
   </url><url>
     <loc>https://braindump.badykov.com/posts/</loc>
   </url><url>
     <loc>https://braindump.badykov.com/posts/20211031221219-russian_finance_monitoring/</loc>
+  </url><url>
+    <loc>https://braindump.badykov.com/posts/20211103135200-substrate_custom_tokens/</loc>
   </url><url>
     <loc>https://braindump.badykov.com/tags/</loc>
   </url><url>

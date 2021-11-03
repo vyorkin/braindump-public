@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head><title>emacs – Vasiliy&#39;s Braindump</title>
+  <head><title>Substrate custom tokens – Vasiliy&#39;s Braindump</title>
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +8,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 
 
+
+<link rel="preload" href="/fonts/iosevka-regular.woff2" as="font" type="font/woff2" crossorigin>
 
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -37,24 +39,159 @@
 
 <div class="grid">
   <div class="page" data-level="1">
-    <h1 class="collapsed-title">emacs</h1>
+    <h1 class="collapsed-title">Substrate custom tokens</h1>
     <div class="content">
-      <a href="https://braindump.badykov.com/posts/20211031155131-emacs/" alt="emacs" class="permalink"><h1>emacs</h1></a>
-      <h2 id="packages">Packages</h2>
+      <a href="https://braindump.badykov.com/posts/20211103135200-substrate_custom_tokens/" alt="Substrate custom tokens" class="permalink"><h1>Substrate custom tokens</h1></a>
+      <h2 id="overview">Overview</h2>
+<p>There are a few ways to launch a token with Substrate.</p>
 <ul>
-<li><a href="/posts/20211031155808-org_roam/"
+<li><a href="https://paritytech.github.io/substrate/master/pallet%5Fbalances/index.html"
    
     target="_blank">
 
-   org-roam
+   pallet_balances
 
+   
+   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
    
 
 
    
 </a>
 </li>
-<li></li>
+<li><a href="https://paritytech.github.io/substrate/master/pallet%5Fassets/index.html"
+   
+    target="_blank">
+
+   pallet_assets
+
+   
+   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+   
+
+
+   
+</a>
+</li>
+<li>?</li>
+</ul>
+<h2 id="balances-pallet">Balances Pallet</h2>
+<h3 id="overview">Overview</h3>
+<p>Manages a single finguble token, handles accounts and their balances.</p>
+<h3 id="initial-balances">Initial balances</h3>
+<p>Supplying initial balances with a genesis config:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">fn</span> <span style="color:#50fa7b">genesis_config</span>(...) -&gt; <span style="color:#50fa7b">GenesisConfig</span> {
+    <span style="color:#6272a4">// ...
+</span><span style="color:#6272a4"></span>    GenesisConfig {
+        <span style="color:#6272a4">// ...
+</span><span style="color:#6272a4"></span>        balances: <span style="color:#50fa7b">runtime</span>::BalancesConfig {
+            balances: <span style="color:#50fa7b">vec</span><span style="color:#ff79c6">!</span>[
+                <span style="color:#6272a4">// (AccountId, Balance)
+</span><span style="color:#6272a4"></span>                <span style="color:#6272a4">// ...
+</span><span style="color:#6272a4"></span>            ],
+        },
+        <span style="color:#6272a4">// ...
+</span><span style="color:#6272a4"></span>    }
+}
+</code></pre></div><h3 id="transaction-fees">Transaction fees</h3>
+<p>Normally, transaction fees are paid with this pallet&rsquo;s accounts.</p>
+<pre tabindex="0"><code class="language-nil" data-lang="nil">fee = base_fee + byte_fee * length + weight_fee
+</code></pre><h4 id="details">Details</h4>
+<p>This is implemented in the <a href="https://paritytech.github.io/substrate/master/pallet%5Ftransaction%5Fpayment/index.html"
+   
+    target="_blank">
+
+   pallet_transaction_payment
+
+   
+   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+   
+
+
+   
+</a>
+ and could
+be configured in the Runtime like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust">parameter_types<span style="color:#ff79c6">!</span> {
+    <span style="color:#6272a4">// Per-byte fee.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">const</span> TransactionByteFee: <span style="color:#50fa7b">u128</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">*</span> MICRO_LUN;
+
+    <span style="color:#6272a4">// Fee multiplier for operational extrinsics.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">pub</span> <span style="color:#ff79c6">const</span> OperationalFeeMultiplier: <span style="color:#8be9fd">u8</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5</span>;
+}
+
+<span style="color:#ff79c6">impl</span> pallet_transaction_payment::Config <span style="color:#ff79c6">for</span> Runtime {
+    <span style="color:#6272a4">// Handler for withdrawing, refunding and depositing the transaction fee.
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// Transaction fees are withdrawn before the transaction is executed.
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// After the transaction was executed the transaction weight can be
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// adjusted, depending on the used resources by the transaction. If the
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// transaction weight is lower than expected, parts of the transaction fee
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// might be refunded. In the end the fees can be deposited.
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">//
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// Basically, here we&#39;re saying that we want to charge fees from balances pallet.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">type</span> <span style="color:#50fa7b">OnChargeTransaction</span> <span style="color:#ff79c6">=</span> pallet_transaction_payment::CurrencyAdapter<span style="color:#ff79c6">&lt;</span>Balances, ()<span style="color:#ff79c6">&gt;</span>;
+
+    <span style="color:#6272a4">// The fee to be paid for making a transaction; the per-byte portion.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">type</span> <span style="color:#50fa7b">TransactionByteFee</span> <span style="color:#ff79c6">=</span> TransactionByteFee;
+
+    <span style="color:#6272a4">// Convert a weight value into a deductible fee based on the currency type.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">type</span> <span style="color:#50fa7b">WeightToFee</span> <span style="color:#ff79c6">=</span> IdentityFee<span style="color:#ff79c6">&lt;</span>Balance<span style="color:#ff79c6">&gt;</span>;
+
+    <span style="color:#6272a4">// Update the multiplier of the next block, based on the previous block&#39;s weight.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">type</span> <span style="color:#50fa7b">FeeMultiplierUpdate</span> <span style="color:#ff79c6">=</span> ();
+
+    <span style="color:#6272a4">// A fee mulitplier for `Operational` extrinsics to
+</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// compute &#34;virtual tip&#34; to boost their `priority`.
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">type</span> <span style="color:#50fa7b">OperationalFeeMultiplier</span> <span style="color:#ff79c6">=</span> OperationalFeeMultiplier;
+}
+</code></pre></div><h2 id="assets-pallet">Assets Pallet</h2>
+<p>Allows to have multiple fungible tokens. Provides a simple asset
+management functinality, without extra features like locking.</p>
+<p>You can manage assets with the Polkadot UI &ndash; there is an
+<code>Assets</code> menu item (under <code>Network</code>).</p>
+<h3 id="observations">Observations</h3>
+<ol>
+<li>Looks like craation of assets and transfering works from the
+UI</li>
+<li>Calling <code>transfer</code> or <code>transferKeepAlive</code> from the extrinsics
+panel doesn&rsquo;t change the <code>assets.balances</code> state.</li>
+<li>I&rsquo;m unable to explore the related event internals due to
+<a href="https://github.com/polkadot-js/apps/issues/6468"
+   
+    target="_blank">
+
+   polkadot
+UI bug
+
+   
+   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+   
+
+
+   
+</a>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=7qkqEfToH8w&amp;ab%5Fchannel=ParityTechnologies"
+   
+    target="_blank">
+
+   Six ways to launch a token on Substrate
+
+   
+   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-link-icon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+   
+
+
+   
+</a>
+ (youtube video)
+<ul>
+<li>There is no <code>GenericAsset</code> in <code>substrate &gt; 2.x</code> anymore</li>
+</ul>
+</li>
 </ul>
 
       
