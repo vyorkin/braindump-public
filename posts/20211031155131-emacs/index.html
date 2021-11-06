@@ -94,6 +94,10 @@
 
    
 
+   
+
+   
+
 
 
 
@@ -169,16 +173,6 @@ window.store = {
     
     
     
-    "https:\/\/braindump.badykov.com\/posts\/20211031154915-polkadot\/": {
-        
-        "title": "polkadot",
-        "tags": [],
-        "content": "Something about polkadot.\n", 
-        "url": "https:\/\/braindump.badykov.com\/posts\/20211031154915-polkadot\/"
-    },
-    
-    
-    
     "https:\/\/braindump.badykov.com\/posts\/20211102203354-polkadot_secure_validator\/": {
         
         "title": "Polkadot Secure Validator",
@@ -219,12 +213,42 @@ window.store = {
     
     
     
+    "https:\/\/braindump.badykov.com\/posts\/20211103202435-shell_runtime\/": {
+        
+        "title": "Shell runtime",
+        "tags": [],
+        "content": "Its purpose is to provide a minimal runtime of a parachain that will later be exchanged by a runtime upgrade with the real parachain runtime.\n", 
+        "url": "https:\/\/braindump.badykov.com\/posts\/20211103202435-shell_runtime\/"
+    },
+    
+    
+    
     "https:\/\/braindump.badykov.com\/posts\/20211103135200-substrate_custom_tokens\/": {
         
         "title": "Substrate custom tokens",
         "tags": [],
-        "content": "Overview There are a few ways to launch a token with Substrate.\n pallet_balances    pallet_assets    ?  Balances Pallet Overview Manages a single finguble token, handles accounts and their balances.\nInitial balances Supplying initial balances with a genesis config:\npub fn genesis_config(...) -\u0026gt; GenesisConfig { // ...  GenesisConfig { // ...  balances: runtime::BalancesConfig { balances: vec![ // (AccountId, Balance)  // ...  ], }, // ...  } } Transaction fees Normally, transaction fees are paid with this pallet\u0026rsquo;s accounts.\nfee = base_fee + byte_fee * length + weight_fee Details This is implemented in the pallet_transaction_payment   and could be configured in the Runtime like this:\nparameter_types! { // Per-byte fee.  pub const TransactionByteFee: u128 = 1 * MICRO_LUN; // Fee multiplier for operational extrinsics.  pub const OperationalFeeMultiplier: u8 = 5; } impl pallet_transaction_payment::Config for Runtime { // Handler for withdrawing, refunding and depositing the transaction fee.  // Transaction fees are withdrawn before the transaction is executed.  // After the transaction was executed the transaction weight can be  // adjusted, depending on the used resources by the transaction. If the  // transaction weight is lower than expected, parts of the transaction fee  // might be refunded. In the end the fees can be deposited.  //  // Basically, here we\u0026#39;re saying that we want to charge fees from balances pallet.  type OnChargeTransaction = pallet_transaction_payment::CurrencyAdapter\u0026lt;Balances, ()\u0026gt;; // The fee to be paid for making a transaction; the per-byte portion.  type TransactionByteFee = TransactionByteFee; // Convert a weight value into a deductible fee based on the currency type.  type WeightToFee = IdentityFee\u0026lt;Balance\u0026gt;; // Update the multiplier of the next block, based on the previous block\u0026#39;s weight.  type FeeMultiplierUpdate = (); // A fee mulitplier for `Operational` extrinsics to  // compute \u0026#34;virtual tip\u0026#34; to boost their `priority`.  type OperationalFeeMultiplier = OperationalFeeMultiplier; } Assets Pallet Allows to have multiple fungible tokens. Provides a simple asset management functinality, without extra features like locking.\nYou can manage assets with the Polkadot UI \u0026ndash; there is an Assets menu item (under Network).\nObservations  Looks like craation of assets and transfering works from the UI Calling transfer or transferKeepAlive from the extrinsics panel doesn\u0026rsquo;t change the assets.balances state. I\u0026rsquo;m unable to explore the related event internals due to polkadot UI bug     References  Six ways to launch a token on Substrate   (youtube video)  There is no GenericAsset in substrate \u0026gt; 2.x anymore    ", 
+        "content": "Overview There are a few ways to launch a token with Substrate.\n pallet_balances    pallet_assets    ?  Balances Pallet Overview Manages a single finguble token, handles accounts and their balances.\nInitial balances Supplying initial balances with a genesis config:\npub fn genesis_config(...) -\u0026gt; GenesisConfig { // ...  GenesisConfig { // ...  balances: runtime::BalancesConfig { balances: vec![ // (AccountId, Balance)  // ...  ], }, // ...  } } Transaction fees Normally, transaction fees are paid with this pallet\u0026rsquo;s accounts.\nfee = base_fee + byte_fee * length + weight_fee Details This is implemented in the pallet_transaction_payment   and could be configured in the Runtime like this:\nparameter_types! { // Per-byte fee.  pub const TransactionByteFee: u128 = 1 * MICRO_LUN; // Fee multiplier for operational extrinsics.  pub const OperationalFeeMultiplier: u8 = 5; } impl pallet_transaction_payment::Config for Runtime { // Handler for withdrawing, refunding and depositing the transaction fee.  // Transaction fees are withdrawn before the transaction is executed.  // After the transaction was executed the transaction weight can be  // adjusted, depending on the used resources by the transaction. If the  // transaction weight is lower than expected, parts of the transaction fee  // might be refunded. In the end the fees can be deposited.  //  // Basically, here we\u0026#39;re saying that we want to charge fees from balances pallet.  type OnChargeTransaction = pallet_transaction_payment::CurrencyAdapter\u0026lt;Balances, ()\u0026gt;; // The fee to be paid for making a transaction; the per-byte portion.  type TransactionByteFee = TransactionByteFee; // Convert a weight value into a deductible fee based on the currency type.  type WeightToFee = IdentityFee\u0026lt;Balance\u0026gt;; // Update the multiplier of the next block, based on the previous block\u0026#39;s weight.  type FeeMultiplierUpdate = (); // A fee mulitplier for `Operational` extrinsics to  // compute \u0026#34;virtual tip\u0026#34; to boost their `priority`.  type OperationalFeeMultiplier = OperationalFeeMultiplier; } Assets Pallet Allows to have multiple fungible tokens. Provides a simple asset management functinality, without extra features like locking.\nYou can manage assets with the Polkadot UI \u0026ndash; there is an Assets menu item (under Network).\nObservations  Looks like creation of assets and transfering works from the UI Calling transfer or transferKeepAlive from the extrinsics panel doesn\u0026rsquo;t change the assets.balances state. I\u0026rsquo;m unable to explore the related event internals due to polkadot UI bug     References  Six ways to launch a token on Substrate   (youtube video)  There is no GenericAsset in substrate \u0026gt; 2.x anymore    ", 
         "url": "https:\/\/braindump.badykov.com\/posts\/20211103135200-substrate_custom_tokens\/"
+    },
+    
+    
+    
+    "https:\/\/braindump.badykov.com\/posts\/20211103210117-substrate_manual_instant_sealing\/": {
+        
+        "title": "Substrate manual\/instant sealing",
+        "tags": [],
+        "content": "Rationale Usually in development environment (for local testing) we want to run as a standalone blockchain node (not as a parachain) and author blocks instantly as transactions are received. For that purposes we have two consensus algrorithms in Substrate: Manual Seal and Instant Seal.\nThe instant seal consensus engine, and its cousin the manual seal consensus engine, are both included in the same sc-consensus-manual-seal crate.\nManual seal There is one author and it authors a block whenever you tell it via an RPC call.\nInstant sealing There is one author and it attempts to author a block as soon as it sees a transaction in the pool, most often leading to one transaction per block. This is perfect for testing and iterating on a runtime.\nThis is similar to Truffle Suite's Ganache in the Ethereum ecosystem, but without the UI.\nReferences  [[https://www.youtube.com/watch?v=uhkV0jAcWDY\u0026ab%5Fchannel=ParityTechnologies/   [Manual Seal and Instant Seal]] - Youtube video  ", 
+        "url": "https:\/\/braindump.badykov.com\/posts\/20211103210117-substrate_manual_instant_sealing\/"
+    },
+    
+    
+    
+    "https:\/\/braindump.badykov.com\/posts\/20211104061522-substrate_storage_hashers\/": {
+        
+        "title": "Substrate storage hashers",
+        "tags": [],
+        "content": "blake2_128_concat Cryptographically secure hash function.\nChoose this hasher if users of your chain have the ability to affect the storage keys.\ntwox_64_concat Not cryptographically secure, but is more efficient than blake2. You should not use this hasher if chain users can affect the storage key. However, it is perfectly safe to use this hasher to gain performance in scenarios where the users do not control the keys.\nidentity Identity function that returns the same value it receives. This hasher is only an option when the key type in your storage map is already a hash, and is not controllable by the user.\n", 
+        "url": "https:\/\/braindump.badykov.com\/posts\/20211104061522-substrate_storage_hashers\/"
     },
     
     

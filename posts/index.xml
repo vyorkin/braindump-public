@@ -54,15 +54,6 @@
     </item>
     
     <item>
-      <title>polkadot</title>
-      <link>https://braindump.badykov.com/posts/20211031154915-polkadot/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://braindump.badykov.com/posts/20211031154915-polkadot/</guid>
-      <description>Something about polkadot.</description>
-    </item>
-    
-    <item>
       <title>Polkadot Secure Validator</title>
       <link>https://braindump.badykov.com/posts/20211102203354-polkadot_secure_validator/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -91,6 +82,15 @@
     </item>
     
     <item>
+      <title>Shell runtime</title>
+      <link>https://braindump.badykov.com/posts/20211103202435-shell_runtime/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://braindump.badykov.com/posts/20211103202435-shell_runtime/</guid>
+      <description>Its purpose is to provide a minimal runtime of a parachain that will later be exchanged by a runtime upgrade with the real parachain runtime.</description>
+    </item>
+    
+    <item>
       <title>Substrate custom tokens</title>
       <link>https://braindump.badykov.com/posts/20211103135200-substrate_custom_tokens/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -100,6 +100,29 @@
  pallet_balances    pallet_assets    ?  Balances Pallet Overview Manages a single finguble token, handles accounts and their balances.
 Initial balances Supplying initial balances with a genesis config:
 pub fn genesis_config(...) -&amp;gt; GenesisConfig { // ...  GenesisConfig { // ...  balances: runtime::BalancesConfig { balances: vec![ // (AccountId, Balance)  // ...  ], }, // .</description>
+    </item>
+    
+    <item>
+      <title>Substrate manual/instant sealing</title>
+      <link>https://braindump.badykov.com/posts/20211103210117-substrate_manual_instant_sealing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://braindump.badykov.com/posts/20211103210117-substrate_manual_instant_sealing/</guid>
+      <description>Rationale Usually in development environment (for local testing) we want to run as a standalone blockchain node (not as a parachain) and author blocks instantly as transactions are received. For that purposes we have two consensus algrorithms in Substrate: Manual Seal and Instant Seal.
+The instant seal consensus engine, and its cousin the manual seal consensus engine, are both included in the same sc-consensus-manual-seal crate.
+Manual seal There is one author and it authors a block whenever you tell it via an RPC call.</description>
+    </item>
+    
+    <item>
+      <title>Substrate storage hashers</title>
+      <link>https://braindump.badykov.com/posts/20211104061522-substrate_storage_hashers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://braindump.badykov.com/posts/20211104061522-substrate_storage_hashers/</guid>
+      <description>blake2_128_concat Cryptographically secure hash function.
+Choose this hasher if users of your chain have the ability to affect the storage keys.
+twox_64_concat Not cryptographically secure, but is more efficient than blake2. You should not use this hasher if chain users can affect the storage key. However, it is perfectly safe to use this hasher to gain performance in scenarios where the users do not control the keys.
+identity Identity function that returns the same value it receives.</description>
     </item>
     
   </channel>
